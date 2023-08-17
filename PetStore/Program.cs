@@ -10,13 +10,13 @@ namespace PetStore
     {
         static void Main(string[] args)
         {
-         
+
             DogLeash mydogleashisblue = new DogLeash(); // mydogleashisblue = new DogLeash(); Could be said either way)
             CatFood mycatfood = new CatFood(); ; // CatFood mycatfoodloveisland; Could be said either way)
             ProductLogic logic = new ProductLogic();
 
             Console.WriteLine("Press 1 to add a product");
-            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
+            Console.WriteLine("Press 2 to view catfood, Press 3 to view dogleash and type 'exit' to quit");
             string userInput = Console.ReadLine() ?? "exit"; // " ?? and exit- is there so when the user leaves this feild empty
 
 
@@ -28,7 +28,7 @@ namespace PetStore
                     string? productTypeInput = Console.ReadLine();
                     if (productTypeInput == "1")
                     {
-                   
+
 
                         Console.WriteLine("Enter the name of the product");
                         mycatfood.Name = Console.ReadLine() ?? "Empty";
@@ -81,7 +81,7 @@ namespace PetStore
                         Console.WriteLine("Enter the size in LengthInches:");
                         mygodleashisblue.LengthInches = int.Parse(Console.ReadLine());
 
-                       
+
                         Console.WriteLine(String.Format("Name: {0}\nPrice: {1}\nQuantity:  {2}\nDescription: {3}\nMaterial: {4}\nLengthInches: {5}", mydogleashisblue.Name, mydogleashisblue.Price, mydogleashisblue.Quantity, mydogleashisblue.Description, mydogleashisblue.Material, mydogleashisblue.LengthInches));
                         logic.AddProduct(mydogleashisblue);
 
@@ -98,11 +98,11 @@ namespace PetStore
                     string catFood = Console.ReadLine();
 
                     CatFood catfood = logic.GetCatFoodhByName(catFood);
-                 
+
 
                     if (catFood != null)
                     {
-                       
+
                         Console.WriteLine(JsonSerializer.Serialize(mycatfood));
                     }
                     else
@@ -129,16 +129,17 @@ namespace PetStore
                     }
                 }
 
-            Console.WriteLine("Press 1 to add a product");
-            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
-            Console.WriteLine("Type 'exit' to quit");
-            userInput = Console.ReadLine();
+                Console.WriteLine("Press 1 to add a product");
+                Console.WriteLine("Press 2 to view catfood, Press 3 to view dogleash and type 'exit' to quit");
+                Console.WriteLine("Type 'exit' to quit");
+                userInput = Console.ReadLine();
+
 
             }
 
-            }
         }
     }
+}   
 
     
 
