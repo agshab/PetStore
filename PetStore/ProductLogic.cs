@@ -60,6 +60,7 @@ namespace PetStore
         }
 
 
+
         public CatFood? GetCatFoodhByName(string name)
         {
             try
@@ -72,6 +73,7 @@ namespace PetStore
                 Console.WriteLine($"There was an error {ex}");
                 return null;
             }
+            Console.WriteLine("hello!");
 
         }
 
