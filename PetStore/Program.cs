@@ -6,99 +6,140 @@ using System.Text.Json;
 
 namespace PetStore
 {
-
-
     internal class program // Create the main function, the entry point of the project
-    { 
+    {
         static void Main(string[] args)
         {
+         
+            DogLeash mydogleashisblue = new DogLeash(); // mydogleashisblue = new DogLeash(); Could be said either way)
+            CatFood mycatfood = new CatFood(); ; // CatFood mycatfoodloveisland; Could be said either way)
+            ProductLogic logic = new ProductLogic();
+
             Console.WriteLine("Press 1 to add a product");
-            string userInput = Console.ReadLine();
+            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
+            string userInput = Console.ReadLine() ?? "exit"; // " ?? and exit- is there so when the user leaves this feild empty
+
 
             while (userInput.ToLower() != "exit") // this means the user put any of the first top three options
             {
-               
-                Console.WriteLine("Press 2 to view a catfood, Press 2 to view a dogleash and type 'exit' to quit");             
-                string CatorDog = Console.ReadLine() ?? "exit";
-
-                if (CatorDog.ToString() == "1")
+                if (userInput == "1")
                 {
-                  
-                    CatFood mycatfoodloveisland = new CatFood();
-                    //CatFood mycatfoodloveisland;(Could be said either way)
-
-
-                    Console.WriteLine("What is the name of the product?");
-                    mycatfoodloveisland.Name = Console.ReadLine() ?? "Empty";
-
-
-                    Console.WriteLine("What is the quantity?");
-                    mycatfoodloveisland.Quantity = int.Parse(Console.ReadLine());
-
-
-                    Console.WriteLine("What is the description?");
-                    mycatfoodloveisland.Description = Console.ReadLine() ?? "Empty";
-
-
-                    Console.WriteLine("What is the weight in pounds?");
-                    mycatfoodloveisland.WeightinPounds = double.Parse(Console.ReadLine());
-
-
-                    Console.WriteLine("Is this Kitten food? yes or no");
-                    string userinput = Console.ReadLine() ?? "Empty";
-
-                    if (userinput.ToLower() == "yes")
-
+                    Console.WriteLine("Enter the product type (1 for Cat Food, 2 for Dog Leash):");
+                    string? productTypeInput = Console.ReadLine();
+                    if (productTypeInput == "1")
                     {
-                        mycatfoodloveisland.KittenFood = true;
-                    }
+                   
 
+                        Console.WriteLine("Enter the name of the product");
+                        mycatfood.Name = Console.ReadLine() ?? "Empty";
+
+
+                        Console.WriteLine("Enter the quantity");
+                        mycatfood.Quantity = int.Parse(Console.ReadLine());
+
+
+                        Console.WriteLine("Enter the description");
+                        mycatfood.Description = Console.ReadLine() ?? "Empty";
+
+
+                        Console.WriteLine("Enter the weight in pounds");
+                        mycatfood.WeightinPounds = double.Parse(Console.ReadLine());
+
+
+                        Console.WriteLine("Is this Kitten food? yes or no");
+                        string userinput = Console.ReadLine() ?? "Empty";
+
+                        if (userinput.ToLower() == "yes")
+
+                        {
+                            mycatfood.KittenFood = true;
+                        }
+
+                        else
+
+                        {
+                            mycatfood.KittenFood = false;
+                        }
+                        logic.AddProduct(mycatfood);
+                    }
+                    else if (productTypeInput == "2")
+                    {
+                        DogLeash mygodleashisblue = new DogLeash();
+
+                        Console.WriteLine("Enter the name of the produc:?");
+                        mygodleashisblue.Name = Console.ReadLine() ?? "Empty";
+
+                        Console.WriteLine("Enter the Price:");
+                        mygodleashisblue.Price = decimal.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter the quantity:");
+                        mygodleashisblue.Quantity = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter the material:");
+                        mygodleashisblue.Material = Console.ReadLine() ?? "Empty";
+
+                        Console.WriteLine("Enter the size in LengthInches:");
+                        mygodleashisblue.LengthInches = int.Parse(Console.ReadLine());
+
+                       
+                        Console.WriteLine(String.Format("Name: {0}\nPrice: {1}\nQuantity:  {2}\nDescription: {3}\nMaterial: {4}\nLengthInches: {5}", mydogleashisblue.Name, mydogleashisblue.Price, mydogleashisblue.Quantity, mydogleashisblue.Description, mydogleashisblue.Material, mydogleashisblue.LengthInches));
+                        logic.AddProduct(mydogleashisblue);
+
+                    }
                     else
-
                     {
-                        mycatfoodloveisland.KittenFood = false;
+                        Console.WriteLine("Invalid input.");
                     }
-
-                    Console.WriteLine(JsonSerializer.Serialize(mycatfoodloveisland));
-                    Console.WriteLine("Type 'exit' to quit");
-
-
-                userInput = Console.ReadLine();
                 }
+                else if (userInput == "2") // this is to view the product to find the product input the user has enter
 
-                else if (CatorDog.ToString() == "2") // this is to view the product to find the product input that the user has enter
                 {
-                    DogLeash mydogleashisblue = new DogLeash();
-                    //mydogleashisblue = new DogLeash(); (Could be said either way)
+                    Console.WriteLine("Enter the catfood name:");
+                    string catFood = Console.ReadLine();
 
+                    CatFood catfood = logic.GetCatFoodhByName(catFood);
+                 
 
-                    Console.WriteLine("Please enter the name of the produc:?");
-                    mydogleashisblue.Name = Console.ReadLine() ?? "Empty";
-
-                    Console.WriteLine("Please enter the Price:");
-                    mydogleashisblue.Price = decimal.Parse(Console.ReadLine());
-
-                    Console.WriteLine("Please enter the quantity:");
-                    mydogleashisblue.Quantity = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine("Please enter the material:");
-                    mydogleashisblue.Material = Console.ReadLine() ?? "Empty";
-
-                    Console.WriteLine("Please enter the size in LengthInches:");
-                    mydogleashisblue.LengthInches = int.Parse(Console.ReadLine());
-
-
-                    Console.WriteLine(JsonSerializer.Serialize(mydogleashisblue));
-                    Console.WriteLine("Press 2 to view a catfood, Press 2 to view a dogleash and type 'exit' to quit");
-                    Console.WriteLine("Type 'exit' to quit");
-                    userInput = Console.ReadLine();
-
+                    if (catFood != null)
+                    {
+                       
+                        Console.WriteLine(JsonSerializer.Serialize(mycatfood));
+                    }
+                    else
+                    {
+                        Console.WriteLine("CatFood notfound!");
+                    }
                 }
+                else if (userInput == "3")
+                {
+
+                    Console.WriteLine("Enter the DogLeash name:");
+                    string dogleash = Console.ReadLine();
+
+                    DogLeash dogLeash = logic.GetDogLeashByName(dogleash);
+
+                    if (dogLeash != null)
+                    {
+
+                        Console.WriteLine(JsonSerializer.Serialize(dogleash));
+                    }
+                    else
+                    {
+                        Console.WriteLine("DogLeash notfound!");
+                    }
+                }
+
+            Console.WriteLine("Press 1 to add a product");
+            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
+            Console.WriteLine("Type 'exit' to quit");
+            userInput = Console.ReadLine();
+
+            }
 
             }
         }
     }
-}
+
     
 
         
