@@ -10,7 +10,7 @@ namespace PetStore
     {
         static void Main(string[] args)
         {
-         
+
             DogLeash mydogleashisblue = new DogLeash(); // mydogleashisblue = new DogLeash(); Could be said either way)
             CatFood mycatfood = new CatFood(); ; // CatFood mycatfoodloveisland; Could be said either way)
             ProductLogic logic = new ProductLogic();
@@ -136,9 +136,9 @@ namespace PetStore
 
             }
 
-            }
         }
     }
+}   
 
     
 
