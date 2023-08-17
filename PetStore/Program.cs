@@ -16,7 +16,7 @@ namespace PetStore
             ProductLogic logic = new ProductLogic();
 
             Console.WriteLine("Press 1 to add a product");
-            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash, Press 4 to view products in stock and type 'exit' to quit");
+            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash, Press 4 to view products in stock, Press 5 to view the total price and type 'exit' to quit");
             string userInput = Console.ReadLine() ?? "exit"; // " ?? and exit- is there so when the user leaves this feild empty
 
 
@@ -137,11 +137,17 @@ namespace PetStore
                     {
                         Console.WriteLine(items);
                     }
+                }
+                else if (userInput == "5")
+                {
+                    var totalPrice = logic.GetTotalPriceOfInventory(logic.GetOnlyInStockProducts());
+
+                    Console.WriteLine($"Total price of the inventory is {totalPrice}");
 
                 }
 
             Console.WriteLine("Press 1 to add a product");
-            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash, Press 4 to view products in stock and type 'exit' to quit");
+            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash, Press 4 to view products in stock, Press 5 to view the total price eand type 'exit' to quit");
             Console.WriteLine("Type 'exit' to quit");
             userInput = Console.ReadLine();
 

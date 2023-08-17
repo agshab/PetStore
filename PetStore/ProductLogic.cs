@@ -1,8 +1,8 @@
 ﻿using System;
 namespace PetStore
 {
-	public class ProductLogic : IProductLogic
-	{
+    public class ProductLogic : IProductLogic
+    {
 
         private List<Product> _products;
         private Dictionary<string, DogLeash> _dictDog;
@@ -30,10 +30,10 @@ namespace PetStore
             {
                 _dictDog.Add(((DogLeash)GoldProduct).Name, GoldProduct as DogLeash);
             }
-            
+
             else if (GoldProduct is CatFood)
             {
-               
+
                 _dictCat.Add(GoldProduct.Name, GoldProduct as CatFood);
             }
 
@@ -52,7 +52,7 @@ namespace PetStore
 
         public DogLeash? GetDogLeashByName(string name) // this is a definition of the declatraion of a fucntion
                                                         // and everything between {} is the declation of the that function
-        {         
+        {
             try
             {
                 return _dictDog[name];
@@ -82,18 +82,48 @@ namespace PetStore
         }
 
 
-        // petstore 4
 
-        public List<string> GetOnlyInStockProducts() // once the method is created in the iproduclogic interfeace
+
+
+
+        // PetStore 4
+
+        //public List<string> GetOnlyInStockProducts() // once the method is created in the iproduclogic interfeace
         // this needs to be implemeted in the productlogic class
+        //{
+        // throw new NotImplementedException(); (used as filler until we put the method we want to put in here)
+        //return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
+        //}
+
+
+
+        // PetStore 5
+
+        public List<Product> GetOnlyInStockProducts()
         {
-            // throw new NotImplementedException(); (used as filler until we put the method we want to put in here)
-            return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
+            return ListExtensions.InStock(_products);
         }
 
+        public decimal GetTotalPriceOfInventory(List<Product> instockonly)
+        {
+
+            decimal result = 0;
+            //if (instockonly != null)
+            //{
+
+            foreach (Product i in instockonly)
+            {
+                result += i.Price * i.Quantity;
+            }
+
+            return result;
+            //}
+            //else
+            //{
+            //return 0;
+            //}
 
 
-
+        }
     }
 }
-
