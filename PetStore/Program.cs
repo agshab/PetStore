@@ -16,7 +16,7 @@ namespace PetStore
             ProductLogic logic = new ProductLogic();
 
             Console.WriteLine("Press 1 to add a product");
-            Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
+            Console.WriteLine("Press 2 to view catfood, Press 3 to view dogleash and type 'exit' to quit");
             string userInput = Console.ReadLine() ?? "exit"; // " ?? and exit- is there so when the user leaves this feild empty
 
 
@@ -130,21 +130,20 @@ namespace PetStore
                 }
 
                 Console.WriteLine("Press 1 to add a product");
-                Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
+                Console.WriteLine("Press 2 to view catfood, Press 3 to view dogleash and type 'exit' to quit");
                 Console.WriteLine("Type 'exit' to quit");
                 userInput = Console.ReadLine();
 
-            }
 
+            }
         }
     }
-}   
+}
 
-    
 
-        
-    
-    
+
+
+
 
 
 
