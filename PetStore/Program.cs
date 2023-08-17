@@ -133,6 +133,7 @@ namespace PetStore
             Console.WriteLine("Press 2 to view a catfood, Press 3 to view a dogleash and type 'exit' to quit");
             Console.WriteLine("Type 'exit' to quit");
             userInput = Console.ReadLine();
+            userInput = Console.ReadLine();
 
             }
 
