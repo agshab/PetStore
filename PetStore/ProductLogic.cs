@@ -1,26 +1,22 @@
-﻿using System;
+﻿
 namespace PetStore
 {
-    public class ProductLogic : IProductLogic
+    internal class ProductLogic : IProductLogic
     {
 
         private List<Product> _products;
-        private Dictionary<string, DogLeash> _dictDog;
-        private Dictionary<string, CatFood> _dictCat;
-
-
 
         public ProductLogic() // This is the constructor
         {
             _products = new List<Product>
-            {new Product { Name = "First Product", Description = "First Product", Price = 5.5M, Quantity = 10},
-            new Product { Name = "Second Product", Description = "Second Product", Price = 10.0M, Quantity = 4},
-            new Product { Name = "Third Product", Description = "Third Product", Price = 20.0M, Quantity = 2},
-            new Product { Name = "Fourth Product", Description = "Fourth Product", Price = 6.0M, Quantity = 0},
+            {
+                new Product { Name = "First Product", Description = "First Product", Price = 5.5M, Quantity = 10},
+                new Product { Name = "Second Product", Description = "Second Product", Price = 10.0M, Quantity = 4},
+                new Product { Name = "Third Product", Description = "Third Product", Price = 20.0M, Quantity = 2},
+                new Product { Name = "Fourth Product", Description = "Fourth Product", Price = 6.0M, Quantity = 0},
             };
-
-          
         }
+
         /// <summary>
         /// Adds Product of Type Product(CatFood or DogLeash)
         /// </summary>
@@ -31,6 +27,7 @@ namespace PetStore
             _products.Add(product);
             Console.WriteLine("Product added successfully!");
         }
+
         /// <summary>
         /// Accesses the Product List
         /// </summary>
@@ -46,7 +43,8 @@ namespace PetStore
         /// <param name="name">The name of the dog leash.</param>
         /// <returns>The dog leash with the specified name, or null if not found.</returns>
         [Obsolete("This method is deprecated. Use GetItemByName instead.")]
-        public DogLeash? GetDogLeashByName(string name)
+
+        public Dogleash? GetDogLeashByName(string name)
         {
             //try
             //{
@@ -60,12 +58,14 @@ namespace PetStore
             throw new NotImplementedException();
 
         }
+
         /// <summary>
         /// Gets a dog leash by name. [Deprecated: Use GetItemByName instead.]
         /// </summary>
         /// <param name="name">The name of the cat food.</param>
         /// <returns>The dog leash with the specified name, or null if not found.</returns>
         [Obsolete("This method is deprecated. Use GetItemByName instead.")]
+
         public CatFood? GetCatFoodByName(string name)
         {
             //try
@@ -79,6 +79,7 @@ namespace PetStore
             //}
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// Gets all names of type Product from the Product List
         /// </summary>
@@ -107,6 +108,7 @@ namespace PetStore
         {
             return ListExtensions.InStock(_products);
         }
+
         /// <summary>
         /// Gets a List of class Product and does calculation.
         /// </summary>
@@ -119,7 +121,6 @@ namespace PetStore
             {
                 result += i.Price * i.Quantity;
             }
-
             return result;
         }
     }

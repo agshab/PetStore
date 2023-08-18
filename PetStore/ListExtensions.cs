@@ -1,9 +1,8 @@
-﻿using System;
+﻿
 namespace PetStore
 {
-	public static class ListExtensions
+	internal static class ListExtensions
 	{
-
 
 		public static List<T> InStock<T>(this List<T> list) where T : Product
         {

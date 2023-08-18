@@ -1,11 +1,4 @@
-﻿using System;
-using PetStore;
-using System.Text.Json;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-
+﻿using System.Text.Json;
 
 namespace PetStore
 {
@@ -16,7 +9,6 @@ namespace PetStore
         public decimal Price { get; set; } = 0;
         public int Quantity { get; set; } = 0;
         public string? Description { get; set; }
-
 
 
 

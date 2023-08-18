@@ -1,14 +1,13 @@
-﻿using System;
+﻿
 using System.Text.Json;
 
 namespace PetStore
 {
-    public class UILogic
+    internal class UILogic
     {
         /// <summary>
         /// Manages the user interface for the PetStore application.
         /// </summary>
-
         public UILogic(IProductLogic prLogic)
         {
         }
@@ -19,7 +18,7 @@ namespace PetStore
         public void Run()
         {
 
-            DogLeash mydogleashisblue = new DogLeash(); // mydogleashisblue = new DogLeash(); Could be said either way)
+            Dogleash mydogleashisblue = new Dogleash(); // mydogleashisblue = new DogLeash(); Could be said either way)
             CatFood mycatfood = new CatFood(); ; // CatFood mycatfoodloveisland; Could be said either way)
             ProductLogic logic = new ProductLogic();
 
@@ -35,11 +34,24 @@ namespace PetStore
                     string? productTypeInput = Console.ReadLine();
 
                     if (productTypeInput == "1")
-                    {
+                    {   
+                        bool IsValidInput = false;
+                        Console.WriteLine("Enter the cat food name:");
+                        mycatfood.Name = Console.ReadLine();
 
-                        Console.WriteLine("Enter the name of the product");
-                        mycatfood.Name = Console.ReadLine() ?? "Empty";
-
+                        Console.WriteLine("Enter the cat food price:");
+                        while (!IsValidInput)
+                        {
+                            if (decimal.TryParse(Console.ReadLine(), out decimal quantity))
+                            {
+                                mycatfood.Price = quantity;
+                                IsValidInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid price input. Please enter a valid decimal number.");
+                            }
+                        }                     
 
                         Console.WriteLine("Enter the quantity");
                         mycatfood.Quantity = int.Parse(Console.ReadLine());
@@ -71,22 +83,22 @@ namespace PetStore
                     }
                     else if (productTypeInput == "2")
                     {
-                        DogLeash mygodleashisblue = new DogLeash();
+                       
 
-                        Console.WriteLine("Enter the name of the produc:?");
-                        mygodleashisblue.Name = Console.ReadLine() ?? "Empty";
+                        Console.WriteLine("Enter the name of the DogLeash name:?");
+                        mydogleashisblue.Name = Console.ReadLine() ?? "Empty";
 
                         Console.WriteLine("Enter the Price:");
-                        mygodleashisblue.Price = decimal.Parse(Console.ReadLine());
+                        mydogleashisblue.Price = decimal.Parse(Console.ReadLine());
 
                         Console.WriteLine("Enter the quantity:");
-                        mygodleashisblue.Quantity = int.Parse(Console.ReadLine());
+                        mydogleashisblue.Quantity = int.Parse(Console.ReadLine());
 
                         Console.WriteLine("Enter the material:");
-                        mygodleashisblue.Material = Console.ReadLine() ?? "Empty";
+                        mydogleashisblue.Material = Console.ReadLine() ?? "Empty";
 
                         Console.WriteLine("Enter the size in LengthInches:");
-                        mygodleashisblue.LenghtInches = int.Parse(Console.ReadLine());
+                        mydogleashisblue.LenghtInches = int.Parse(Console.ReadLine());
                      
 
                         Console.WriteLine(String.Format("Name: {0}\nPrice: {1}\nQuantity:  {2}\nDescription: {3}\nMaterial: {4}\nLengthInches: {5}", mydogleashisblue.Name, mydogleashisblue.Price, mydogleashisblue.Quantity, mydogleashisblue.Description, mydogleashisblue.Material, mydogleashisblue.LenghtInches));
@@ -103,9 +115,7 @@ namespace PetStore
                 {
                     Console.WriteLine("Enter the catfood name:");
                     string catFood = Console.ReadLine();
-
                     CatFood catfood = logic.GetCatFoodByName(catFood);
-
 
                     if (catFood != null)
                     {
@@ -121,8 +131,7 @@ namespace PetStore
                 {
                     Console.WriteLine("Enter the DogLeash name:");
                     string dogleash = Console.ReadLine();
-
-                    DogLeash dogLeash = logic.GetDogLeashByName(dogleash);
+                    Dogleash dogLeash = logic.GetDogLeashByName(dogleash);
 
                     if (dogLeash != null)
                     {
@@ -135,21 +144,17 @@ namespace PetStore
                     }
                 }
                 else if (userInput == "4")
-                {
-
-                    var instockproduct = logic.GetOnlyInStockProducts();
-
-                    foreach (var items in instockproduct)
+                
                     {
-                        Console.WriteLine(items);
+                        IList<Product> myitemlist = logic.GetOnlyInStockProducts();
+                        foreach (var item in myitemlist) { Console.WriteLine(item.Name); }
                     }
-                }
+                
                 else if (userInput == "5")
                 {
-                    var totalPrice = logic.GetTotalPriceOfInventory(logic.GetOnlyInStockProducts());
+                    var TotalPrice = logic.GetTotalPriceOfInventory(logic.GetOnlyInStockProducts());
 
-                    Console.WriteLine($"Total price of the inventory is {totalPrice}");
-
+                    Console.WriteLine($"Total price of the inventory is {TotalPrice}");
                 }
 
                 Console.WriteLine(" Press 1 to add a product \n Press 2 to view a CatFoodd \n Press 3 to view a DogLeash \n Press 4 to view current products in stock \n Press 5 to get total price of inventory \n Type 'exit' to quit \n");
