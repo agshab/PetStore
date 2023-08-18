@@ -12,14 +12,9 @@ namespace PetStore
 	public class DogLeash : Product // It's being inherit from the product class
 	{
 
-        public int LengthInches;
-        public string? Material;
+        public int LenghtInches { get; set; } = 0;
+        public string? Material { get; set; }
 
-
-
-        public DogLeash()
-		{
-		}
-	}
+    }
 }
 
