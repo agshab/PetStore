@@ -1,12 +1,15 @@
-﻿
-namespace PetStore
+﻿using FluentValidation;
+using PetStore.Interfaces;
+using PetStore.Validators;
+using PetStore.Classes;
+
+namespace PetStore.Classes
 {
     internal class ProductLogic : IProductLogic
     {
+        private IList<Product> _products;
 
-        private List<Product> _products;
-
-        public ProductLogic() // This is the constructor
+        public ProductLogic() //This is a constructor 
         {
             _products = new List<Product>
             {
@@ -22,10 +25,20 @@ namespace PetStore
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="product"></param>
+        ///
+
         public void AddProduct<T>(T product) where T : Product
         {
+            var validator = new ClassValidator<T>(); // Use the appropriate validator based on the product type
+
+            var validationResult = validator.Validate(product);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
             _products.Add(product);
-            Console.WriteLine("Product added successfully!");
+            Console.WriteLine(" Product added successfully!\n");
         }
 
         /// <summary>
@@ -34,7 +47,7 @@ namespace PetStore
         /// <returns>this.List</returns>
         public IList<Product> GetAllProducts()
         {
-            return this._products;
+            return _products;
         }
 
         /// <summary>
@@ -104,24 +117,22 @@ namespace PetStore
         /// Accesses the static function ListExtentions.InStock
         /// </summary>
         /// <returns>IList of class Products</returns>
+
         public IList<Product> GetOnlyInStockProducts()
         {
-            return ListExtensions.InStock(_products);
+            return _products.InStock();
+            // Linq is abilty to used by using (.InStock) by
+            // both "This" opertor and "." and using the extenstion function called "list"
         }
-
         /// <summary>
         /// Gets a List of class Product and does calculation.
         /// </summary>
         /// <param name="instockonly"></param>
         /// <returns>decimal</returns>
-        public decimal GetTotalPriceOfInventory(IList<Product> instockonly)
+        public decimal GetTotalPriceOfInventory()
         {
-            decimal result = 0;
-            foreach (Product i in instockonly)
-            {
-                result += i.Price * i.Quantity;
-            }
-            return result;
+
+            return _products.InStock().Sum();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 
-namespace PetStore
+namespace PetStore.Classes
 {
-	public class Product // Parent class
-	{
+    public class Product // Parent class
+    {
 
         public string? Name { get; set; }
         public decimal Price { get; set; } = 0;
@@ -18,4 +18,3 @@ namespace PetStore
         }
     }
 }
-
