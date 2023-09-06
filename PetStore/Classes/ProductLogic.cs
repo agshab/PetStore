@@ -48,6 +48,7 @@ namespace PetStore.Classes
         public IList<Product> GetAllProducts()
         {
             return _products;
+            throw new NotImplementedException();
         }
 
         /// <summary>
